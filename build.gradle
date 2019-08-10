@@ -5,6 +5,7 @@ buildscript {
     ext.serialization_version = "0.10.0"
     ext.ktor_version = '1.1.4'
     ext.dokka_version = '0.9.17'
+    ext.sqldelight_version = "1.1.4"
 
 
     repositories {
@@ -16,15 +17,20 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        //Android
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta05'
+
+        //Kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
-
         classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
 
-        classpath 'com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta04'
+        //Database
+        classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
 
+        //Test
         classpath "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"

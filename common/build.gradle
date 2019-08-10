@@ -4,6 +4,7 @@ plugins {
     id "kotlinx-serialization"
     id "org.jetbrains.dokka"
     id "kotlin-android-extensions"
+    id "com.squareup.sqldelight"
 }
 
 android {
@@ -24,8 +25,6 @@ android {
     }
 }
 
-
-
 kotlin {
 
     final def iOSTarget = System.getenv("SDK_NAME")?.startsWith("iphoneos") ? presets.iosArms64 : presets.iosX64
@@ -38,17 +37,106 @@ kotlin {
         }
     }
 
-    android("android")
+    jvm("android")
 
     sourceSets {
 
         commonMain.dependencies {
-            implementation kotlin("stdlib-common")
+            api kotlin("stdlib-common")
+
+            implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
+            implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
+
+//            Meta -- multiplatform is not currently resolving
+//            implementation "com.squareup.sqldelight:runtime-metadata:$sqldelight_version"
+
+
+//            Might want Ktor
+//            implementation "io.ktor:ktor-client-core:$ktor_version"
+//            implementation "io.ktor:ktor-client-json:$ktor_version"
+//            implementation "io.ktor:ktor-client-logging:$ktor_version"
+
         }
 
         commonTest.dependencies {
+            api kotlin('stdlib-common')
             implementation kotlin("test-common")
             implementation kotlin("test-annotations-common")
+
+        }
+
+        androidMain.dependencies {
+            api kotlin('stdlib')
+            implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+            implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+            implementation "com.squareup.sqldelight:runtime-jvm:$sqldelight_version"
+
+//            Might want Ktor
+//            implementation "io.ktor:ktor-client-android:$ktor_version"
+//            implementation "io.ktor:ktor-client-json-jvm:$ktor_version"
+//            implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
+
+        }
+
+        androidTest.dependencies {
+            implementation kotlin("test-junit")
+        }
+
+        iOSmain.dependencies {
+            api kotlin('stdlib')
+            implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines_version"
+            implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+
+//            Might want Ktor
+//            implementation "io.ktor:ktor-client-ios:$ktor_version"
+//            implementation "io.ktor:ktor-client-json-native:$ktor_version"
+//            implementation "io.ktor:ktor-client-logging-native:$ktor_version"
+        }
+    }
+
+    dokka {
+        outputFormat = "markdown"
+
+        outputDirectory = "$buildDir/kotlindoc"
+
+        // Dokka workaround for MPP
+        impliedPlatforms = ["common"]
+        kotlinTasks { [] }
+
+        sourceRoot {
+            path = kotlin.sourceSets.commonMain.kotlin.srcDirs[0]
+            platforms = ["common"]
+        }
+    }
+
+    sqldelight {
+        KeepDB {
+            packageName = "com.soupflies.keepr_mpp.db"
         }
     }
 }
+
+configurations {
+    compileClasspath
+}
+
+task packForXCode(type: Sync) {
+    final File frameworkDir = new File(buildDir, "xcode-frameworks")
+    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final def framework = kotlin.targets.iOS.binaries.getFramework("Keepr_common", mode)
+
+    inputs.property "mode", mode
+    dependsOn framework.linkTask as Task
+
+    from { framework.outputFile.parentFile }
+    into frameworkDir
+
+    doLast {
+        new File(frameworkDir, 'gradlew').with {
+            text = "#!/bin/bash\nexport 'JAVA_HOME=${System.getProperty("java.home")}'\ncd '${rootProject.rootDir}'\n./gradlew \$@\n"
+            setExecutable(true)
+        }
+    }
+}
+
+tasks.build.dependsOn packForXCode
