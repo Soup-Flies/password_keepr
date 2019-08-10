@@ -1,0 +1,5 @@
+rootProject.name = 'keepr_mpp'
+
+include(":android", ":common")
+
+enableFeaturePreview('GRADLE_METADATA')
