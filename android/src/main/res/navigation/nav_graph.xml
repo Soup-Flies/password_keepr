@@ -29,6 +29,6 @@
             android:id="@+id/passwordVaultFragment">
         <action android:id="@+id/action_passwordVaultFragment_to_addNewPassword" app:destination="@id/addNewPassword"/>
     </fragment>
-    <fragment android:id="@+id/addNewPassword" android:name="com.soupflies.keepr.ui.addNewPassword.AddNewPassword"
+    <fragment android:id="@+id/addNewPassword" android:name="com.soupflies.keepr.ui.addNewPassword.AddNewPasswordFragment"
               android:label="fragment_add_new_password" tools:layout="@layout/fragment_add_new_password"/>
 </navigation>

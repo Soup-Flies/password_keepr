@@ -4,7 +4,6 @@ plugins {
     id "kotlinx-serialization"
     id "org.jetbrains.dokka"
     id "kotlin-android-extensions"
-    id "com.squareup.sqldelight"
 }
 
 android {
@@ -37,7 +36,7 @@ kotlin {
         }
     }
 
-    jvm("android")
+    android()
 
     sourceSets {
 
@@ -46,10 +45,7 @@ kotlin {
 
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
             implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-
-//            Meta -- multiplatform is not currently resolving
-//            implementation "com.squareup.sqldelight:runtime-metadata:$sqldelight_version"
-
+            implementation "com.netguru.kissme:kissme-common:$kissme_version"
 
 //            Might want Ktor
 //            implementation "io.ktor:ktor-client-core:$ktor_version"
@@ -69,7 +65,7 @@ kotlin {
             api kotlin('stdlib')
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
             implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
-            implementation "com.squareup.sqldelight:runtime-jvm:$sqldelight_version"
+            implementation "com.netguru.kissme:kissme-android:$kissme_version"
 
 //            Might want Ktor
 //            implementation "io.ktor:ktor-client-android:$ktor_version"
@@ -82,10 +78,11 @@ kotlin {
             implementation kotlin("test-junit")
         }
 
-        iOSmain.dependencies {
+        iOSMain.dependencies {
             api kotlin('stdlib')
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines_version"
             implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
+            implementation "com.netguru.kissme:kissme-ios:$kissme_version"
 
 //            Might want Ktor
 //            implementation "io.ktor:ktor-client-ios:$ktor_version"
@@ -109,11 +106,6 @@ kotlin {
         }
     }
 
-    sqldelight {
-        KeepDB {
-            packageName = "com.soupflies.keepr_mpp.db"
-        }
-    }
 }
 
 configurations {

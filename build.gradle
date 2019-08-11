@@ -5,8 +5,8 @@ buildscript {
     ext.serialization_version = "0.10.0"
     ext.ktor_version = '1.1.4'
     ext.dokka_version = '0.9.17'
-    ext.sqldelight_version = "1.1.4"
     ext.nav_version = "2.1.0-rc01"
+    ext.kissme_version = "0.2.3"
 
 
     repositories {
@@ -15,6 +15,8 @@ buildscript {
         mavenCentral()
         maven { url "https://kotlin.bintray.com/kotlinx" }
         maven { url "https://kotlin.bintray.com/ktor" }
+        maven {  url 'https://dl.bintray.com/netguru/maven/' }
+        maven { url "https://jitpack.io" }
     }
 
     dependencies {
@@ -27,9 +29,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
-
-        //Database
-        classpath "com.squareup.sqldelight:gradle-plugin:$sqldelight_version"
 
         //Test
         classpath "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
@@ -45,5 +44,7 @@ allprojects {
         mavenCentral()
         maven { url "https://kotlin.bintray.com/kotlinx" }
         maven { url "https://kotlin.bintray.com/ktor" }
+        maven {  url 'https://dl.bintray.com/netguru/maven/' }
+        maven { url "https://jitpack.io" }
     }
 }

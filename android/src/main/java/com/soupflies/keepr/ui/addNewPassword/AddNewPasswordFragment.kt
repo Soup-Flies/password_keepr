@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.soupflies.keepr.R
 
-class AddNewPassword : Fragment() {
+class AddNewPasswordFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,9 +21,6 @@ class AddNewPassword : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        (activity as AppCompatActivity)?.getSupportActionBar()?.show()
+        (activity as AppCompatActivity).supportActionBar?.show()
     }
-
-
-
 }
