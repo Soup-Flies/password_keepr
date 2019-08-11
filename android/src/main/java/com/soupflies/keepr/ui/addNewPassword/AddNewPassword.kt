@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.soupflies.keepr.R
 
 class AddNewPassword : Fragment() {
@@ -17,6 +18,12 @@ class AddNewPassword : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_new_password, container, false)
     }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity)?.getSupportActionBar()?.show()
+    }
+
 
 
 }
