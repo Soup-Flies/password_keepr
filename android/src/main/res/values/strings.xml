@@ -8,6 +8,12 @@
     <string name="email_label">email</string>
     <string name="password_label">password</string>
     <string name="reset_code_label">reset code</string>
+    <string name="new_password_label">new password</string>
+    <string name="new_password_confirm_label">confirm password</string>
+    <string name="title_label">title</string>
+    <string name="account_label">account name</string>
+    <string name="website_label">website</string>
+    <string name="notes_label">notes</string>
 
 
     <!--    Button Text    -->
@@ -28,13 +34,10 @@
     <string name="input_password">Input your password</string>
 
     <!--    Forgot Password     -->
-    <string name="reset_password">Reset your password</string>
-    <string name="reset_password_body">Clicking this button will send a message to the account\n%1$s\nwith a code to
+    <string name="forgot_password">Reset your password</string>
+    <string name="forgot_password_body">Clicking this button will send a message to the account\n%1$s\nwith a code to
         reset your password
     </string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

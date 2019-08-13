@@ -32,15 +32,17 @@
             android:id="@+id/title2" android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" android:textColor="@android:color/white"
             android:textSize="45sp"
-            app:layout_constraintStart_toEndOf="@+id/keepr_logo" android:layout_marginStart="8dp"
-            app:layout_constraintTop_toTopOf="@+id/keepr_logo" app:layout_constraintBottom_toBottomOf="@+id/keepr_logo"/>
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/keepr_logo" app:layout_constraintBottom_toBottomOf="@+id/keepr_logo"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
     <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp" app:srcCompat="@drawable/ic_keepr_logo"
             android:id="@+id/keepr_logo" android:layout_marginTop="50dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.24"/>
+            app:layout_constraintHorizontal_bias="1.0" app:layout_constraintEnd_toStartOf="@+id/title2"
+            android:layout_marginEnd="8dp"/>
     <TextView
             android:text="@string/fingerprint_dialog_touch_sensor"
             android:layout_width="wrap_content"

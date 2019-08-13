@@ -16,7 +16,4 @@ object SignupViewModel {
     val passwordError = Observable<String>("")
 
     val useBiometrics = Observable<Boolean>(true)
-
-
-
 }

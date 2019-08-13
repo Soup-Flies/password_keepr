@@ -12,8 +12,6 @@ import com.soupflies.keepr.R
 
 class MainFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,9 +21,7 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        Log.d("Checking Log", "Do we get this point before attempting navigate??")
         findNavController().navigate(R.id.action_mainFragment_to_signupFragment)
     }
 

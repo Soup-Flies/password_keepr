@@ -1,18 +1,23 @@
 package com.soupflies.keepr_mpp.ui.presenters
 
+import com.soupflies.keepr_mpp.repositories.UserRepository
 import com.soupflies.keepr_mpp.serialized.Account
+import com.soupflies.keepr_mpp.ui.viewModels.PasswordVaultViewModel
+import com.soupflies.keepr_mpp.ui.views.PasswordVaultView
 
-class PasswordVaultPresenter(view: BaseView, viewModel: ViewModel): BasePresenter(view, viewModel) {
+class PasswordVaultPresenter(val view: PasswordVaultView, val viewModel: PasswordVaultViewModel) {
 
+    val userRepo = UserRepository()
 
-    fun getArchivedAccounts(): List<Account> {
+    fun getArchivedAccounts() {
 
-        // Get current User
+        val userResponse = userRepo.getCurrentUser()
 
-        // Return user embedded account information
-
-        return listOf<Account>()
+        viewModel.userAccounts.value = userResponse?.accounts ?: listOf()
     }
 
-    fun addNewAccount()
+    fun addNewAccount() { view.navigateToCreateAccount() }
+
+
+    fun removeAccount() {}
 }
