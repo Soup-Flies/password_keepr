@@ -32,7 +32,7 @@ class SignupFragment: Fragment(), SignupView {
     }
 
     override fun navigateToPasswordVault() {
-        findNavController().navigate(R.id.action_loginFragment_to_passwordVaultFragment)
+        findNavController().navigate(R.id.action_signupFragment_to_passwordVaultFragment)
     }
 
     override fun validateInput(): Boolean {

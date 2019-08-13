@@ -19,6 +19,8 @@
     <fragment android:id="@+id/signupFragment" android:name="com.soupflies.keepr.ui.signup.SignupFragment"
               android:label="signup_fragment" tools:layout="@layout/fragment_signup">
         <action android:id="@+id/action_signupFragment_to_loginFragment" app:destination="@id/loginFragment"/>
+        <action android:id="@+id/action_signupFragment_to_passwordVaultFragment"
+                app:destination="@id/passwordVaultFragment"/>
     </fragment>
     <fragment
             android:name="com.soupflies.keepr.ui.passwordVault.PasswordVaultFragment"
